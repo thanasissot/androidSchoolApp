@@ -1,7 +1,9 @@
 package com.example.activitiessotiroglou;
 
 import android.content.Intent;
+
 import androidx.appcompat.app.AppCompatActivity;
+
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -18,9 +20,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
-        btnStart = (Button)findViewById(R.id.btnStart);
-        btnResult = (Button)findViewById(R.id.btnResult);
+        btnStart = (Button) findViewById(R.id.btnStart);
+        btnResult = (Button) findViewById(R.id.btnResult);
 
         btnStart.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -37,51 +38,39 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private void onStartClicked()
-    {
-        Log.d(AppSettings.tag,"onStartClicked");
-
+    private void onStartClicked() {
+        Log.d(AppSettings.tag, "onStartClicked");
         Intent intent = new Intent("android.intent.action.Customer");
         startActivity(intent);
     }
 
-    private void onResultClicked()
-    {
-        Log.d(AppSettings.tag,"onResultClicked");
+    private void onResultClicked() {
+        Log.d(AppSettings.tag, "onResultClicked");
         Intent intent = new Intent("android.intent.action.Customer");
-
-        intent.putExtra("food","pizza");
-
-        startActivityForResult(intent,feedCustomer);
+        intent.putExtra("food", "pizza");
+        startActivityForResult(intent, feedCustomer);
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        Log.d(AppSettings.tag,"onActivityResult");
-        Log.d(AppSettings.tag,"requestCode: " + requestCode);
-        Log.d(AppSettings.tag,"resultCode: " + resultCode);
+        Log.d(AppSettings.tag, "onActivityResult");
+        Log.d(AppSettings.tag, "requestCode: " + requestCode);
+        Log.d(AppSettings.tag, "resultCode: " + resultCode);
 
-        if(data == null)
-        {
-            Log.e(AppSettings.tag,"data: NULL");
-        }
-        else
-        {
-            if(data.hasExtra("comment")) Log.d(AppSettings.tag,"data: " + data.getStringExtra("comment"));
+        if (data == null) {
+            Log.e(AppSettings.tag, "data: NULL");
+        } else {
+            if (data.hasExtra("comment"))
+                Log.d(AppSettings.tag, "data: " + data.getStringExtra("comment"));
         }
 
-        if(requestCode == feedCustomer && resultCode == RESULT_OK)
-        {
-            Log.d(AppSettings.tag,"We fed the customer");
+        if (requestCode == feedCustomer && resultCode == RESULT_OK) {
+            Log.d(AppSettings.tag, "We fed the customer");
+        } else {
+            Log.d(AppSettings.tag, "NOPE!");
         }
-        else
-        {
-            Log.d(AppSettings.tag,"NOPE!");
-        }
-
-
 
     }
 }
